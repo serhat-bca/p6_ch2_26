@@ -1,4 +1,4 @@
-const Movie = ({ movie }) => <li>{movie.title}</li>;
+import Movie from "./components/Movie";
 
 const App = ({ movies }) => {
   return (
