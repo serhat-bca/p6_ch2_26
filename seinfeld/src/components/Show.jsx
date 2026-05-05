@@ -1,4 +1,8 @@
 const Show = ({ show }) => {
+
+const total = show.episodes.reduce((a, episode) => a + episode.views, 0)
+
+
   return (
     <div>
       <h1>{show.title}</h1>
@@ -11,6 +15,7 @@ const Show = ({ show }) => {
           );
         })}
       </ul>
+      <p>Total views: {total.toLocaleString()}</p>
     </div>
   );
 };
