@@ -4,6 +4,7 @@ import { useState } from "react";
 const App = ({ movies }) => {
   const [movieList, setMovies] = useState(movies);
   const [movieName, setName] = useState("");
+  const [filter, setFilter] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,15 +12,26 @@ const App = ({ movies }) => {
     // uncontrolled input field
     // console.log("Message:", e.target.movieName.value);
     // e.target.movieName.value = "";
-    console.log("Messgae: ",movieName)
+    console.log("Messgae: ", movieName);
     setName("");
+    setMovies([
+      ...movieList,
+      {
+        id: Math.floor(Math.random() * 1000),
+        title: movieName,
+        watchlist: false,
+      },
+    ]);
   };
 
   return (
     <div>
       <h2>Movies</h2>
+      <button onClick={() => setFilter(!filter)}>
+        {filter ? "Show All Movies" : "Show Watchlist"}
+      </button>
       <ul>
-        {movies.map((m) => (
+        {movieList.map((m) => (
           <Movie key={m.id} movie={m} />
         ))}
       </ul>
