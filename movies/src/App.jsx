@@ -6,6 +6,10 @@ const App = ({ movies }) => {
   const [movieName, setName] = useState("");
   const [filter, setFilter] = useState(false);
 
+  const displayedMovies = filter
+    ? movieList.filter((m) => m.watchlist)
+    : movieList;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Submitted");
@@ -31,8 +35,13 @@ const App = ({ movies }) => {
         {filter ? "Show All Movies" : "Show Watchlist"}
       </button>
       <ul>
-        {movieList.map((m) => (
-          <Movie key={m.id} movie={m} />
+        {displayedMovies.map((m) => (
+          <Movie
+            movieList={movieList}
+            setMovies={setMovies}
+            key={m.id}
+            movie={m}
+          />
         ))}
       </ul>
       <h3>Add a new movie</h3>
