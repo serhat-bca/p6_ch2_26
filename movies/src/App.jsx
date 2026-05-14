@@ -1,5 +1,7 @@
 import Movie from "./components/Movie";
 import { useState } from "react";
+import MovieList from "./components/MovieList";
+import MovieForm from "./components/MovieForm";
 
 const App = ({ movies }) => {
   const [movieList, setMovies] = useState(movies);
@@ -31,24 +33,18 @@ const App = ({ movies }) => {
   return (
     <div>
       <h2>Movies</h2>
-      <button onClick={() => setFilter(!filter)}>
-        {filter ? "Show All Movies" : "Show Watchlist"}
-      </button>
-      <ul>
-        {displayedMovies.map((m) => (
-          <Movie
-            movieList={movieList}
-            setMovies={setMovies}
-            key={m.id}
-            movie={m}
-          />
-        ))}
-      </ul>
-      <h3>Add a new movie</h3>
-      <form onSubmit={handleSubmit}>
-        <input onChange={(e) => setName(e.target.value)} value={movieName} />
-        <button type="submit">Add Movie</button>
-      </form>
+      <MovieList
+        setFilter={setFilter}
+        filter={filter}
+        displayedMovies={displayedMovies}
+        movieList={movieList}
+        setMovies={setMovies}
+      />
+      <MovieForm 
+        handleSubmit={handleSubmit}
+        setName={setName}
+        movieName={movieName}
+      />
     </div>
   );
 };
